@@ -4,9 +4,9 @@
   "description": "Test AWS Lambda function using Serverless Framework v4",
   "type": "module",
   "scripts": {
-    "deploy": "serverless deploy",
-    "info": "serverless info",
-    "remove": "serverless remove",
+    "deploy": "SLS_AWS_SDK=3 serverless deploy",
+    "info": "SLS_AWS_SDK=3 serverless info",
+    "remove": "SLS_AWS_SDK=3 serverless remove",
     "test": "tsx --test tests/*.test.ts",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -34,6 +34,6 @@
   "allowScripts": {
     "esbuild@0.28.1": true,
     "fsevents@2.3.3": true,
-    "serverless@4.39.0": true
+    "serverless@4.40.0": true
   }
 }
