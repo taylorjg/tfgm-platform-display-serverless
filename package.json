@@ -6,13 +6,9 @@
   "scripts": {
     "deploy": "SLS_AWS_SDK=3 serverless deploy",
     "info": "SLS_AWS_SDK=3 serverless info",
-    "remove": "SLS_AWS_SDK=3 serverless remove",
     "test": "tsx --test tests/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -20,6 +16,7 @@
     "@types/node": "^26",
     "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.1.3",
     "globals": "^17.7.0",
     "prettier": "^3.9.5",
     "serverless": "^4",

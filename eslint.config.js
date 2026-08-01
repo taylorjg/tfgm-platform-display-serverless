@@ -1,5 +1,6 @@
 import eslint from "@eslint/js";
-import eslintConfigPrettier from "eslint-config-prettier";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
+import prettier from "eslint-plugin-prettier";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -17,6 +18,12 @@ export default tseslint.config(
       globals: {
         ...globals.node,
       },
+    },
+    plugins: {
+      prettier,
+    },
+    rules: {
+      ...prettier.configs.recommended.rules,
     },
   },
   eslintConfigPrettier,

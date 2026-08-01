@@ -20,7 +20,6 @@ build:
 functions:
   searchLocations:
     handler: src/handlers/search-locations.handler
-    memorySize: 256
     timeout: 10
     events:
       - httpApi:
@@ -29,7 +28,6 @@ functions:
 
   getTrams:
     handler: src/handlers/get-trams.handler
-    memorySize: 256
     timeout: 10
     events:
       - httpApi:
