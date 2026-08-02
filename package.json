@@ -1,6 +1,6 @@
 {
   "name": "tfgm-platform-display-serverless",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Serverless API backend for tfgm-platform-display",
   "type": "module",
   "scripts": {
