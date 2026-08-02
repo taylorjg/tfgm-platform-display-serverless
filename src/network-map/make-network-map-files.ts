@@ -38,7 +38,7 @@ const processLine = async (
 
 const main = async () => {
   const searchLocationsResponse = await fetch(
-    "https://hsf41foww6.execute-api.us-east-1.amazonaws.com/search-locations",
+    "https://8qyltr090f.execute-api.us-east-1.amazonaws.com/search-locations",
   );
   const locations = (await searchLocationsResponse.json()) as { atcoCode: string; name: string }[];
   await processLine(locations, "Green_Line", "Altrincham - Bury");

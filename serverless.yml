@@ -1,4 +1,4 @@
-service: sls4-test
+service: tfgm-platform-display-serverless
 
 provider:
   name: aws

@@ -1,4 +1,4 @@
-# tfgm-platform-display-serverless
+# Description
 
 AWS Lambda API for Manchester tram data, built with Serverless Framework v4 and TypeScript. Handlers query the [TfGM GraphQL API](https://apiary.tfgm.com) via `graphql-request` and expose simplified HTTP endpoints.
 

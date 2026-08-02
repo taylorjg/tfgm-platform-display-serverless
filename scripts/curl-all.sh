@@ -1,4 +1,4 @@
-DEPLOYED_URL="https://hsf41foww6.execute-api.us-east-1.amazonaws.com"
+DEPLOYED_URL="https://8qyltr090f.execute-api.us-east-1.amazonaws.com"
 
 echo searchLocations:
 curl -X GET "${DEPLOYED_URL}/search-locations?searchKey=road" -s | jq
