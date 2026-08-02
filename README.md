@@ -78,7 +78,7 @@ Deploy scripts set `SLS_AWS_SDK=3` for AWS SDK v3 compatibility with Serverless 
 
 ## CI
 
-GitHub Actions runs `npm run check` on every push and pull request.
+GitHub Actions runs `npm run check` on every push and pull request. The `check` job is required for merges to `main`.
 
 CI requires a repository secret named `SERVERLESS_ACCESS_KEY` for Serverless Framework v4 authentication.
 
