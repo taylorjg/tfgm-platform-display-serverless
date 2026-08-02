@@ -41,32 +41,30 @@ This project uses `legacy-peer-deps` (see `.npmrc`) because `graphql-request` ha
 ## Development
 
 ```bash
-npm run lint          # ESLint (includes Prettier)
-npm run typecheck     # TypeScript
-npm run test          # Integration tests (live TfGM API)
+npm run lint              # ESLint (includes Prettier)
+npm run typecheck         # TypeScript
+npm test                  # Handler integration tests (live TfGM API)
+npm run invoke:local      # Smoke-test all handlers via serverless invoke local
+npm run check             # lint + typecheck + test + invoke:local (same as CI)
 ```
 
-### Invoke handlers locally
+Post-deploy smoke tests (manual — requires AWS credentials and a deployed stack):
 
 ```bash
-bash scripts/invoke-all-local.sh
+npm run invoke:deployed   # Invoke all deployed Lambdas
+npm run invoke:curl       # Hit deployed HTTP API
 ```
 
-Or invoke a single function:
+| Command | Network | Secrets / credentials |
+|---|---|---|
+| `npm test` | Yes (TfGM API) | None |
+| `npm run invoke:local` | Yes (TfGM API) | `SERVERLESS_ACCESS_KEY` |
+| `npm run invoke:deployed` | Yes (TfGM API + AWS) | AWS profile, `SERVERLESS_ACCESS_KEY` |
+| `npm run invoke:curl` | Yes (deployed API) | None (uses URL in script) |
 
-```bash
-npx serverless invoke local -f searchLocations \
-  -d '{"queryStringParameters": {"searchKey": "road"}}'
+Other helper scripts in `scripts/`:
 
-npx serverless invoke local -f getTrams \
-  -d '{"queryStringParameters": {"atcoCode": "9400ZZMASTW"}}'
-```
-
-Other helper scripts live in `scripts/`:
-
-- `curl-all.sh` — hit the deployed API
-- `invoke-all.sh` — invoke deployed Lambdas
-- `test-filtering.sh` — test getTrams filtering scenarios (`1`, `2`, or `3`)
+- `test-filtering.sh` — manual getTrams filtering scenarios (`1`, `2`, or `3`)
 - `logs-all.sh` — tail CloudWatch logs
 
 ## Deploy
@@ -80,10 +78,7 @@ Deploy scripts set `SLS_AWS_SDK=3` for AWS SDK v3 compatibility with Serverless 
 
 ## CI
 
-GitHub Actions runs on every push and pull request:
-
-- lint, typecheck, and unit/integration tests
-- `scripts/invoke-all-local.sh` against the live TfGM API
+GitHub Actions runs `npm run check` on every push and pull request.
 
 CI requires a repository secret named `SERVERLESS_ACCESS_KEY` for Serverless Framework v4 authentication.
 

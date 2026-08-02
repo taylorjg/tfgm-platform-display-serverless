@@ -1,27 +1,27 @@
 name: CI/CD
+
 on:
   push:
   pull_request:
 
 jobs:
-  run-checks:
-    name: Run lint check, typecheck, and build
+  check:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: npm
-      - name: Clean install
+
+      - name: Install dependencies
         run: npm ci
-      - name: Run lint check
-        run: npm run lint
-      - name: Run typecheck
-        run: npm run typecheck
-      - name: Test
-        run: npm run test
-      - name: Invoke Lambda handlers locally
+
+      - name: Run checks
+        run: npm run check
         env:
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
-        run: bash -e scripts/invoke-all-local.sh

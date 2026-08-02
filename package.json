@@ -6,9 +6,13 @@
   "scripts": {
     "deploy": "SLS_AWS_SDK=3 serverless deploy",
     "info": "SLS_AWS_SDK=3 serverless info",
-    "test": "tsx --test tests/*.test.ts",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
+    "test": "tsx --test tests/*.test.ts",
+    "invoke:local": "bash scripts/invoke-all-local.sh",
+    "invoke:deployed": "bash scripts/invoke-all-deployed.sh",
+    "invoke:curl": "bash scripts/curl-all.sh",
+    "check": "npm run lint && npm run typecheck && npm test && npm run invoke:local"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
