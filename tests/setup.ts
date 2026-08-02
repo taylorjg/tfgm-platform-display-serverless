@@ -1,12 +1,8 @@
-import { mock } from "node:test";
+import { vi } from "vitest";
 
-// Suppress console output during tests
-export const silenceConsole = () => {
-  mock.method(console, "log", () => {});
-  mock.method(console, "error", () => {});
-  mock.method(console, "warn", () => {});
-  mock.method(console, "info", () => {});
-};
+process.env.TFGM_API_URL = "https://apiary.tfgm.com";
 
-// Call immediately to silence from the start
-silenceConsole();
+vi.spyOn(console, "log").mockImplementation(() => {});
+vi.spyOn(console, "error").mockImplementation(() => {});
+vi.spyOn(console, "warn").mockImplementation(() => {});
+vi.spyOn(console, "info").mockImplementation(() => {});

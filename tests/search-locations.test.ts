@@ -1,12 +1,7 @@
-import "./setup.ts";
-import { describe, it } from "node:test";
-import assert from "node:assert";
+import { describe, expect, it } from "vitest";
 import type { APIGatewayProxyEventV2, APIGatewayProxyStructuredResultV2 } from "aws-lambda";
 
-// Set env var before importing handler
-process.env.TFGM_API_URL = "https://apiary.tfgm.com";
-
-const { handler } = await import("@app/handlers/search-locations.ts");
+import { handler } from "@app/handlers/search-locations.ts";
 
 const createEvent = (searchKey?: string) =>
   ({
@@ -18,7 +13,7 @@ describe("searchLocations integration test", () => {
     const event = createEvent("Piccadilly");
     const result = (await handler(event)) as APIGatewayProxyStructuredResultV2;
 
-    assert.strictEqual(result.statusCode, 200);
+    expect(result.statusCode).toBe(200);
   });
 
   it("should return an array of locations", async () => {
@@ -26,7 +21,7 @@ describe("searchLocations integration test", () => {
     const result = (await handler(event)) as APIGatewayProxyStructuredResultV2;
 
     const body = JSON.parse(result.body as string);
-    assert.ok(Array.isArray(body), "Response body should be an array");
+    expect(Array.isArray(body)).toBe(true);
   });
 
   it("should return locations with correct shape", async () => {
@@ -34,13 +29,13 @@ describe("searchLocations integration test", () => {
     const result = (await handler(event)) as APIGatewayProxyStructuredResultV2;
 
     const body = JSON.parse(result.body as string);
-    assert.ok(body.length > 0, "Should return at least one location");
+    expect(body.length).toBeGreaterThan(0);
 
     const location = body[0];
-    assert.ok("atcoCode" in location, "Location should have atcoCode");
-    assert.ok("name" in location, "Location should have name");
-    assert.ok("services" in location, "Location should have services");
-    assert.ok(Array.isArray(location.services), "services should be an array");
+    expect(location).toHaveProperty("atcoCode");
+    expect(location).toHaveProperty("name");
+    expect(location).toHaveProperty("services");
+    expect(Array.isArray(location.services)).toBe(true);
   });
 
   it("should return services with correct shape", async () => {
@@ -48,15 +43,11 @@ describe("searchLocations integration test", () => {
     const result = (await handler(event)) as APIGatewayProxyStructuredResultV2;
 
     const body = JSON.parse(result.body as string);
-    const locationWithServices = body.find(
-      (loc: { services: unknown[] }) => loc.services.length > 0,
-    );
-
-    if (locationWithServices) {
-      const service = locationWithServices.services[0];
-      assert.ok("id" in service, "Service should have id");
-      assert.ok("name" in service, "Service should have name");
-    }
+    expect(
+      body.every((loc: { services: Record<string, unknown>[] }) =>
+        loc.services.every((service) => "id" in service && "name" in service),
+      ),
+    ).toBe(true);
   });
 
   it("should return empty array for non-matching search", async () => {
@@ -64,7 +55,7 @@ describe("searchLocations integration test", () => {
     const result = (await handler(event)) as APIGatewayProxyStructuredResultV2;
 
     const body = JSON.parse(result.body as string);
-    assert.ok(Array.isArray(body), "Response body should be an array");
-    assert.strictEqual(body.length, 0, "Should return empty array for non-matching search");
+    expect(Array.isArray(body)).toBe(true);
+    expect(body.length).toBe(0);
   });
 });
