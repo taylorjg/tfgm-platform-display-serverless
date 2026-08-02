@@ -1,7 +1,7 @@
 {
-  "name": "sls4-test",
+  "name": "tfgm-platform-display-serverless",
   "version": "0.0.18",
-  "description": "Test AWS Lambda function using Serverless Framework v4",
+  "description": "Serverless API backend for tfgm-platform-display",
   "type": "module",
   "scripts": {
     "deploy": "SLS_AWS_SDK=3 serverless deploy",
