@@ -1,3 +1,5 @@
+[![CI/CD](https://github.com/taylorjg/tfgm-platform-display-serverless/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/taylorjg/tfgm-platform-display-serverless/actions/workflows/ci-cd.yml)
+
 # Description
 
 AWS Lambda API for Manchester tram data, built with Serverless Framework v4 and TypeScript. Handlers query the [TfGM GraphQL API](https://apiary.tfgm.com) via `graphql-request` and expose simplified HTTP endpoints.
