@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import type { APIGatewayProxyEventV2, APIGatewayProxyStructuredResultV2 } from "aws-lambda";
+import type {
+  APIGatewayProxyEventV2,
+  APIGatewayProxyStructuredResultV2,
+} from "aws-lambda";
 
 import { handler } from "@app/handlers/search-locations.ts";
 
@@ -45,8 +48,8 @@ describe("searchLocations integration test", () => {
     const body = JSON.parse(result.body as string);
     expect(
       body.every((loc: { services: Record<string, unknown>[] }) =>
-        loc.services.every((service) => "id" in service && "name" in service),
-      ),
+        loc.services.every((service) => "id" in service && "name" in service)
+      )
     ).toBe(true);
   });
 

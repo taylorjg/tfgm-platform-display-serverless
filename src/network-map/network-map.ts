@@ -6,6 +6,16 @@ import purpleLine from "./purple-line.json" with { type: "json" };
 import redLine from "./red-line.json" with { type: "json" };
 import yellowLine from "./yellow-line.json" with { type: "json" };
 
-const services = [blueLine, greenLine, navyLine, pinkLine, purpleLine, redLine, yellowLine];
+const services = [
+  blueLine,
+  greenLine,
+  navyLine,
+  pinkLine,
+  purpleLine,
+  redLine,
+  yellowLine,
+];
 
-export const networkMap = new Map(services.map((service) => [service.id, service]));
+export const networkMap = new Map(
+  services.map((service) => [service.id, service])
+);

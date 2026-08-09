@@ -41,5 +41,5 @@ export default tseslint.config(
       ...vitest.configs.recommended.rules,
     },
   },
-  eslintConfigPrettier,
+  eslintConfigPrettier
 );

@@ -8,10 +8,10 @@ This repo is mainly the backend for [tfgm-platform-display](https://github.com/t
 
 ## API
 
-| Endpoint | Method | Query params | Description |
-|---|---|---|---|
-| `/search-locations` | GET | `searchKey` | Search tram stops by name |
-| `/trams` | GET | `atcoCode`, optional `serviceIds`, `towards` | Get departures for a stop |
+| Endpoint            | Method | Query params                                 | Description               |
+| ------------------- | ------ | -------------------------------------------- | ------------------------- |
+| `/search-locations` | GET    | `searchKey`                                  | Search tram stops by name |
+| `/trams`            | GET    | `atcoCode`, optional `serviceIds`, `towards` | Get departures for a stop |
 
 ### Examples
 
@@ -57,12 +57,12 @@ npm run invoke:deployed   # Invoke all deployed Lambdas
 npm run invoke:curl       # Hit deployed HTTP API
 ```
 
-| Command | Network | Secrets / credentials |
-|---|---|---|
-| `npm test` | Yes (TfGM API) | None |
-| `npm run invoke:local` | Yes (TfGM API) | `SERVERLESS_ACCESS_KEY` |
+| Command                   | Network              | Secrets / credentials                |
+| ------------------------- | -------------------- | ------------------------------------ |
+| `npm test`                | Yes (TfGM API)       | None                                 |
+| `npm run invoke:local`    | Yes (TfGM API)       | `SERVERLESS_ACCESS_KEY`              |
 | `npm run invoke:deployed` | Yes (TfGM API + AWS) | AWS profile, `SERVERLESS_ACCESS_KEY` |
-| `npm run invoke:curl` | Yes (deployed API) | None (uses URL in script) |
+| `npm run invoke:curl`     | Yes (deployed API)   | None (uses URL in script)            |
 
 Other helper scripts in `scripts/`:
 
@@ -97,7 +97,7 @@ scripts/          Local invoke, curl, and log helpers
 
 ## Environment
 
-| Variable | Source | Description |
-|---|---|---|
-| `TFGM_API_URL` | `serverless.yml` | TfGM GraphQL endpoint (`https://apiary.tfgm.com`) |
-| `SERVERLESS_ACCESS_KEY` | CI secret / local env | Serverless Framework v4 authentication |
+| Variable                | Source                | Description                                       |
+| ----------------------- | --------------------- | ------------------------------------------------- |
+| `TFGM_API_URL`          | `serverless.yml`      | TfGM GraphQL endpoint (`https://apiary.tfgm.com`) |
+| `SERVERLESS_ACCESS_KEY` | CI secret / local env | Serverless Framework v4 authentication            |

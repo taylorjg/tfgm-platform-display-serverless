@@ -1,6 +1,13 @@
-import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
+import type {
+  APIGatewayProxyEventV2,
+  APIGatewayProxyResultV2,
+} from "aws-lambda";
 import { GraphQLClient } from "graphql-request";
-import { GetTrams, transformGetTrams, RawGetTramsResponse } from "@app/queries/index.ts";
+import {
+  GetTrams,
+  transformGetTrams,
+  RawGetTramsResponse,
+} from "@app/queries/index.ts";
 import { networkMap } from "@app/network-map/network-map.ts";
 import packageJson from "../../package.json" with { type: "json" };
 
@@ -37,7 +44,9 @@ const checkTowardsParam = (towardsParam: string | undefined) => {
   }
 };
 
-export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
+export const handler = async (
+  event: APIGatewayProxyEventV2
+): Promise<APIGatewayProxyResultV2> => {
   console.log(`Version: ${packageJson.version}`);
   console.log("Fetching trams from TfGM API");
 
@@ -51,7 +60,9 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
     const filter = services && towards ? { services, towards } : null;
 
     const graphqlClient = new GraphQLClient(TFGM_API_URL!);
-    const rawData = await graphqlClient.request<RawGetTramsResponse>(GetTrams, { atcoCode });
+    const rawData = await graphqlClient.request<RawGetTramsResponse>(GetTrams, {
+      atcoCode,
+    });
     const data = transformGetTrams(rawData, filter);
 
     console.log("Successfully fetched trams");

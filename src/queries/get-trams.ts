@@ -55,15 +55,19 @@ export type GetTramsResponse = Tram[];
 export const transformGetTrams = (
   raw: RawGetTramsResponse,
   filter: {
-    services: { id: string; name: string; tramStops: { atcoCode: string; name: string }[] }[];
+    services: {
+      id: string;
+      name: string;
+      tramStops: { atcoCode: string; name: string }[];
+    }[];
     towards: "starts" | "ends";
-  } | null,
+  } | null
 ): GetTramsResponse => {
   const location = raw.locationByAtco?.[0];
   if (!location?.departures) return [];
 
   let filteredDepartures = location.departures.filter(
-    (departure) => departure.trip && departure.timings,
+    (departure) => departure.trip && departure.timings
   );
 
   if (filter) {
@@ -72,10 +76,10 @@ export const transformGetTrams = (
 
       return filter.services.some((service) => {
         const thisStopIndex = service.tramStops.findIndex(
-          (tramStop) => tramStop.atcoCode === location.atcoCode,
+          (tramStop) => tramStop.atcoCode === location.atcoCode
         );
         const destinationStopIndex = service.tramStops.findIndex(
-          (tramStop) => tramStop.name === departure.trip.destinationDisplay,
+          (tramStop) => tramStop.name === departure.trip.destinationDisplay
         );
 
         if (thisStopIndex < 0 || destinationStopIndex < 0) return false;

@@ -1,4 +1,7 @@
-import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
+import type {
+  APIGatewayProxyEventV2,
+  APIGatewayProxyResultV2,
+} from "aws-lambda";
 import { GraphQLClient } from "graphql-request";
 import {
   SearchLocations,
@@ -9,7 +12,9 @@ import packageJson from "../../package.json" with { type: "json" };
 
 const { TFGM_API_URL } = process.env;
 
-export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
+export const handler = async (
+  event: APIGatewayProxyEventV2
+): Promise<APIGatewayProxyResultV2> => {
   console.log(`Version: ${packageJson.version}`);
   console.log("Searching locations from TfGM API");
 
@@ -18,9 +23,12 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
 
   try {
     const graphqlClient = new GraphQLClient(TFGM_API_URL!);
-    const rawData = await graphqlClient.request<RawSearchLocationsResponse>(SearchLocations, {
-      searchKey,
-    });
+    const rawData = await graphqlClient.request<RawSearchLocationsResponse>(
+      SearchLocations,
+      {
+        searchKey,
+      }
+    );
     const data = transformSearchLocations(rawData);
 
     console.log(`Successfully found ${data.length} locations`);

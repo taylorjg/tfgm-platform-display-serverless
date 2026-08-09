@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import type { APIGatewayProxyEventV2, APIGatewayProxyStructuredResultV2 } from "aws-lambda";
+import type {
+  APIGatewayProxyEventV2,
+  APIGatewayProxyStructuredResultV2,
+} from "aws-lambda";
 
 import { handler } from "@app/handlers/get-trams.ts";
 
@@ -34,8 +37,11 @@ describe("getTrams integration test", () => {
     expect(
       body.every(
         (tram: Record<string, unknown>) =>
-          "carriages" in tram && "destinationDisplay" in tram && "status" in tram && "due" in tram,
-      ),
+          "carriages" in tram &&
+          "destinationDisplay" in tram &&
+          "status" in tram &&
+          "due" in tram
+      )
     ).toBe(true);
   });
 
@@ -55,8 +61,8 @@ describe("getTrams integration test", () => {
           typeof tram.carriages === "string" &&
           typeof tram.destinationDisplay === "string" &&
           typeof tram.status === "string" &&
-          typeof tram.due === "number",
-      ),
+          typeof tram.due === "number"
+      )
     ).toBe(true);
   });
 

@@ -2,7 +2,9 @@ import { gql } from "graphql-request";
 
 export const SearchLocations = gql`
   query SearchLocations($searchKey: String = "") {
-    searchLocations(params: { modes: [TRAM], limit: 200, searchKey: $searchKey }) {
+    searchLocations(
+      params: { modes: [TRAM], limit: 200, searchKey: $searchKey }
+    ) {
       atcoCode
       name
       ... on MassTransportLocation {
@@ -53,7 +55,7 @@ export type SearchLocationsResponse = SearchLocation[];
 
 // Transform to domain response
 export const transformSearchLocations = (
-  raw: RawSearchLocationsResponse,
+  raw: RawSearchLocationsResponse
 ): SearchLocationsResponse => {
   if (!raw.searchLocations) return [];
 
