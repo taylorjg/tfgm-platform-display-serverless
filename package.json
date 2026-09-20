@@ -28,7 +28,7 @@
     "typescript": "^5",
     "typescript-eslint": "^8.69.0",
     "vite": "^8.3.0",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.1"
   },
   "dependencies": {
     "graphql": "^17.0.2",
