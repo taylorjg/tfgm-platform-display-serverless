@@ -21,14 +21,14 @@
     "@vitest/eslint-plugin": "^1.6.27",
     "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-prettier": "^5.5.7",
     "globals": "^17.13.0",
-    "prettier": "^3.9.9",
-    "serverless": "^4.43.0",
+    "prettier": "^3.9.10",
+    "serverless": "^4.44.0",
     "typescript": "^5",
-    "typescript-eslint": "^8.71.1",
+    "typescript-eslint": "^8.71.2",
     "vite": "^8.3.4",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.4"
   },
   "dependencies": {
     "graphql": "^17.0.2",
